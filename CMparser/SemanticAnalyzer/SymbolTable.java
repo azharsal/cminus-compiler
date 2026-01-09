@@ -1,0 +1,215 @@
+package SemanticAnalyzer;
+import absyn.*;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+
+
+
+public class SymbolTable {
+    
+    private HashMap<String, ArrayList<NodeType>> table;
+    public int scope_level;
+    public NameTy curr_return_type;
+
+
+    // public String scope_name;
+    final static int SPACES = 4;
+
+
+    public SymbolTable() {
+        table = new HashMap<>();
+        scope_level = -1;
+    }
+
+    
+    
+    
+    public void print_this(String line)
+    {
+        indent();
+        System.out.println(line);
+    }
+
+    public void print_error(String line, int line_number)
+    {
+        // indent();
+        System.err.println("Error at line: " + (line_number + 1) + " : " + line );
+    }
+
+    private void indent() {
+        for (int i = 0; i < this.scope_level * SPACES; i++) System.out.print(" ");
+    }
+
+    public void insert(String id, Dec declaration) {
+
+        if (declaration instanceof FunctionDec)
+        {   
+            this.curr_return_type = ((FunctionDec)declaration).result;
+        }
+
+        else if (declaration instanceof SimpleDec)
+        {
+            SimpleDec s = (SimpleDec) declaration;
+            if (s.typ.typ == NameTy.VOID)
+                {
+                    print_error("Cannot declare a varible of type void", declaration.pos);
+                }
+        }
+        else if (declaration instanceof ArrayDec)
+        {
+            ArrayDec s = (ArrayDec) declaration;
+            if (s.typ.typ == NameTy.VOID)
+                {
+                    print_error("Cannot declare a varible of type void", declaration.pos);
+                }
+        }
+        NodeType newNode = new NodeType(id, this.scope_level, declaration);
+
+        // Check if the ID already exists
+        if (!table.containsKey(id)) {
+            // If it doesn't, simply add it
+            ArrayList<NodeType> list = new ArrayList<>();
+            list.add(newNode);
+            table.put(id, list);
+        } else {
+            // If it exists, check for same ID and scope level
+            ArrayList<NodeType> existingNodes = table.get(id);
+            NodeType exists = lookup_for_insert(id);
+            if (declaration instanceof FunctionDec)
+            {   
+                if (exists.def instanceof FunctionDec)
+                {
+                    FunctionDec f = (FunctionDec) exists.def;
+                    if (f.body instanceof NilExp)
+                    {
+                        exists = null;
+                    }
+                }
+            }
+            if (exists == null)
+            {
+                existingNodes.add(newNode);
+            }
+            else{
+                // printSymbolTable();
+                print_error(id + " was previously declared at line " + (exists.def.pos+1), declaration.pos);
+            }
+        }
+    }
+
+
+    public NodeType lookup_for_insert(String id) {
+        ArrayList<NodeType> nodeList = table.get(id);
+        
+        if (nodeList != null) {
+            for (NodeType node : nodeList) {
+                if (node.id.equals(id) && node.level == this.scope_level) {
+                    return node; 
+                }
+            }
+        }
+        return null;
+    }
+
+    public NodeType lookup_for_use(String id) {
+        ArrayList<NodeType> nodeList = table.get(id);
+        NodeType highestScopeNode = null;
+    
+        if (nodeList != null) {
+            int highestScope = -1; 
+            for (NodeType node : nodeList) {
+                if (node.level > highestScope) {
+                    highestScope = node.level;
+                    highestScopeNode = node;
+                }
+            }
+        }
+        return highestScopeNode;
+    }
+    
+    
+
+    public void delete(String id) {
+        table.remove(id);
+    }
+
+    public void enter_scope(String scope_name)
+    {
+        // print_this(message);
+        scope_level++;
+        print_this("Entering scope for " + scope_name);
+
+        
+    }
+
+    public void exit_scope(String scope_name) 
+    {
+        ArrayList<String> keysToRemove = new ArrayList<>();
+
+        for (Map.Entry<String, ArrayList<NodeType>> entry : table.entrySet()) {
+            String id = entry.getKey();
+            ArrayList<NodeType> nodeList = entry.getValue();
+            
+            for (int i = 0; i < nodeList.size(); i++) {
+                NodeType node = nodeList.get(i);
+                if (node.level == scope_level) {
+                    if (node.def instanceof SimpleDec)
+                    {
+                        SimpleDec sDec = (SimpleDec)node.def;
+                
+                        this.print_this(sDec.name + ": " + sDec.typ.toString());
+                    }
+                    else if( node.def instanceof ArrayDec)
+                    {
+                        ArrayDec aDec = (ArrayDec) node.def;
+                        this.print_this(aDec.name + "[" + aDec.size + "]" + ": " + aDec.typ.toString() );
+                    }
+                    else if( node.def instanceof FunctionDec)
+                    {
+                        
+                        FunctionDec fDec = (FunctionDec) node.def;
+                        StringBuilder func_info = new StringBuilder("(");
+                        VarDecList param = fDec.params;
+                        while (param != null) {
+                            if (param.head instanceof SimpleDec) {
+                                SimpleDec simpleDec = (SimpleDec) param.head;
+                                func_info.append(simpleDec.typ.toString());
+                                if (param.tail != null) {
+                                    func_info.append(",");
+                                }
+                            }
+                            else if (param.head instanceof ArrayDec) {
+                                ArrayDec arrayDec = (ArrayDec) param.head;
+                                func_info.append(arrayDec.typ.toString() + "[]");
+                                if (param.tail != null) {
+                                    func_info.append(",");
+                                }
+                            }
+                            param = param.tail;
+                        }
+                        func_info.append(")");
+                        print_this(fDec.func + ":" + func_info.toString() + " -> " + fDec.result.toString());
+                    }
+                    nodeList.remove(i);
+                    i--; 
+                }
+            }
+
+            if (nodeList.isEmpty()) {
+                keysToRemove.add(id);
+            }
+        }
+
+        for (String id : keysToRemove) {
+            table.remove(id);
+        }
+
+        print_this("Exiting scope for " + scope_name);
+        scope_level--;
+    }
+
+}

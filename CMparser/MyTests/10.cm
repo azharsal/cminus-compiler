@@ -1,0 +1,27 @@
+/* 
+    This program demonstrates errors in the function declarations, calls, and invalid expressions.
+*/
+
+bool calculation(int a, int b int l[], int size {
+    int c;
+    c = a - b ** -10;
+
+    if (c != 10)
+    {
+        l[size-1] = c;
+        return true;
+    }
+    return false;
+}
+
+
+void main (void) {
+    int x;
+    int y;
+    int l[10];
+
+    x = input()
+    y = input();
+
+    z = subtract(x, y l, 10);
+}

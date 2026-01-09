@@ -1,0 +1,40 @@
+
+Made By: Salman Azhar (1058981)
+Date: March 3rd 2024
+Course: CIS*4650 W24
+
+*****************
+
+Acknowledgement: This sazhar_CM parser uses code from Professor Fei Songs starter code provided for Checkpoint 1 in CIS 4650 W24.
+
+Please find the project report in sazhar_CM.
+
+*****************
+
+This checkpoint was developed and tested primarily on MacOS
+
+****************
+
+How to run:
+
+-Uncompress the tar file sazhar_CM.tgz
+-Go to /sazhar_CM/CMparser directory on your terminal
+-Make sure the java, javac, jflex, cup and classpath are set according to your system
+-Run:
+    >Make
+-Run:
+    > java -cp  /Cup/Jar/Path CM /path/to/input/cm/file -flag
+-flag can either be: -a(abstract syntax tree) , -s(Symbol table)
+-The output for -a flag will be found in a file with the same filename as the input file but with the extension .ast.
+-The output for -s flag will be found in a file with the same filename as the input file but with the extension .sym.
+
+
+****************
+
+Testing:
+
+The 5 test files from the starter package are found in /GivenTests
+The 5 test files, (1.cm, 2.cm, 3.cm, 4.cm, 5.cm) required from the student are in /Mytests.
+
+
+

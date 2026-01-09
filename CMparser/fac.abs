@@ -1,0 +1,42 @@
+FunctionDec: calculation
+    NameTy: INT
+    SimpleDec: a
+        NameTy: INT
+    SimpleDec: b
+        NameTy: INT
+    CompoundExp: 
+        SimpleDec: c
+            NameTy: INT
+FunctionDec: main
+    NameTy: BOOL
+    CompoundExp: 
+        SimpleDec: x
+            NameTy: INT
+        SimpleDec: y
+            NameTy: INT
+        SimpleDec: z
+            NameTy: INT
+        ArrayDec: l[10]
+            NameTy: INT
+        AssignExp:
+            SimpleVar: x
+            IntExp: 5
+        AssignExp:
+            SimpleVar: y
+            IntExp: 7
+        AssignExp:
+            SimpleVar: z
+            CallExp: subtract
+                SimpleVar: x
+                SimpleVar: y
+        IfExp:
+            OpExp: == 
+                SimpleVar: z
+                IntExp: 10
+            CompoundExp: 
+                AssignExp:
+                    IndexVar: l
+                        IntExp: 0
+                    SimpleVar: z
+                ReturnExp: 
+                    BoolExp: true

@@ -1,0 +1,26 @@
+/* 
+This program demonstrates:
+    1. Invalid function call: missing comman between arguments (line: 21)
+    2. Invalid if statement: missing a closing parenthesis,
+    3. Invalid return statement: attemps to return an invalid expression.
+*/
+
+int bigger(int a, int b) {
+    if (a > b)
+        return a;
+    else
+        return b;
+}
+
+bool main(int argv[]) {
+    int x;
+    int y;
+    x = 10;
+    y = 20;
+
+    z = max(x y);
+
+
+    if ( z > 30
+        return ();
+}

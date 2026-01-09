@@ -1,0 +1,10 @@
+The Abstract Syntax Tree Is: 
+FunctionDec: main
+    NameTy: VOID
+    CompoundExp: 
+        SimpleDec: x
+            NameTy: INT
+        AssignExp:
+            VarExp: 
+                SimpleVar: x
+            IntExp: 1

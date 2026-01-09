@@ -1,0 +1,40 @@
+/* 
+This program demonstrates:
+    1 - Error at line: 22 : Cannot declare a varible of type void
+    2 - Error at line: 30 : Function subtract is not defined
+    3 - Error at line: 32 : Index must evaluate to a type Int
+*/
+
+bool foo(bool a)
+{   if (a == true)
+        return a;
+    return false;
+}
+
+int calculation(int a, int b) {
+    int c;
+    c = a - b * 10;
+    return c;
+}
+
+
+bool main (void) {
+    void w;
+    int x;
+    int y;
+    int z;
+    int l[10];
+
+    x = 5;
+    y = 7;
+    z = subtract(x, y);
+
+    l[foo(false)];
+
+
+    if (z == 10)
+    {
+        l[0] = z;
+        return true;
+    }
+}

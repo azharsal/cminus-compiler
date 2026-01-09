@@ -1,0 +1,29 @@
+/* 
+This program demonstrates:
+    1- Error at line: 11 : Comparison operations require both operands to be int
+    2- Error at line: 14 : Function expects return of type INT
+    3- Error at line: 25 : Argument 3 in function call bigger expected to be BOOL instead recieved INT
+*/
+
+
+
+int bigger(int a, int b, bool c) {
+    if ((a > false) && c)
+        return a;
+    else
+        return;
+}
+
+bool main(int argv[]) {
+    int x;
+    int y;
+    int z;
+    x = 10;
+    y = 20;
+    
+
+    z = bigger(x, y, z);
+
+    if (z > 30)
+        return true;
+}

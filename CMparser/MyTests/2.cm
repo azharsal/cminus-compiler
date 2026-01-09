@@ -1,0 +1,34 @@
+/* This program should run normally.*/
+
+int a;
+int b[10];
+bool c;
+
+void double_it (int x, bool j)
+{
+    if (j)
+    {
+        output(x);
+    }
+    else
+    {
+        output(x*2);
+    }
+}
+void main (int d, int e, int f[]) /*This  is the main function*/
+{
+    int g;
+    int s;
+    int y;
+
+    g = f[3];
+
+    if ( g == d)
+    {   
+        s = 5 + 7 * 4 / 2;
+        double_it(s, true);
+    }
+
+}
+
+bool test_proto(void);

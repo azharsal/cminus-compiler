@@ -1,0 +1,22 @@
+# Compiled Java classes
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Generated parser/lexer files (can be regenerated)
+Lexer.java
+parser.java
+sym.java

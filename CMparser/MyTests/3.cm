@@ -1,0 +1,25 @@
+int add(int a, int b) {
+    return a + b;
+}
+
+
+bool main(void) {
+    int x;
+    int y;
+    bool j;
+    int l;
+
+    y = x + 1;
+
+    x = 5;
+    y = 7;
+    l = add(x, y);
+
+    if (l < 4)
+    {
+        l = x;
+        return true;
+    }
+
+
+}

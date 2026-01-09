@@ -1,0 +1,28 @@
+/* 
+This program demonstrates:
+    1. Invalid function declaration: Missing comma in parameters (line:7)
+    2. Invalid function declaration: Mising parenthesis (line:12)
+    2. Inalid variable declaration: Missing semicolon (line: 14)
+*/
+
+int add(int a int b) {
+    return a + b;
+}
+
+
+bool main void) {
+    int x;
+    int y
+    int z;
+    int l[10];
+
+    x = 5;
+    y = 7;
+    z = add(x, y);
+
+    if (z > 10)
+    {
+        l[0] = z;
+        return true;
+    }
+}

@@ -1,0 +1,56 @@
+/* 
+This program demonstrates:
+    1- Error at line: 11 : Function expects return of type INT
+    2- Error at line: 14 : foo was previously declared at line 9
+    3- Error at line: 28 : Cannot declare a varible of type void
+    4- Error at line: 36 : Function subtract is not defined
+    5- Error at line: 38 : Function foo expects 0 arguments, but got 1
+    6- Error at line: 40 : Test for if statment cannot be evaluated to a boolean
+    7- Error at line: 42 : Function expects return of type BOOL
+    8- Error at line: 45 : Using undeclared variable 'hi'
+*/
+
+
+int foo (void)
+{
+    return;
+}
+
+bool foo(bool a)
+{   if (a == true)
+        return a;
+    return false;
+}
+
+int calculation(int a, int b) {
+    int c;
+    c = a - b * 10;
+    return c;
+}
+
+
+bool main (void) {
+    void w;
+    int x;
+    int y;
+    int z;
+    int l[10];
+
+    x = 5;
+    y = 7;
+    z = subtract(x, y);
+
+    l[foo(false)];
+
+    if (x)
+    {
+        return;
+    }
+
+    if (hi == 10)
+    {
+        l[0] = z;
+        return true;
+    }
+
+}

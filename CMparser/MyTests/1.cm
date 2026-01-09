@@ -1,0 +1,21 @@
+/* This program should run normally.*/
+
+int a;
+int b[10];
+bool c;
+
+void main (bool d, int e, int f[], int k) /*This  is the main function*/
+{
+    int g;
+    g = f[e];
+    g = 2 + 1;
+    if (d)
+    {   
+        d = false;
+        k = 5 + 7 * 4 / 2;
+    }
+
+    return;
+}
+
+bool test_proto(void);

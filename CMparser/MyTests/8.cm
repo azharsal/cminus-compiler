@@ -1,0 +1,33 @@
+/* 
+This program demonstrates:
+    1. Invalid expression which contains multiple binary operations: missing semi colon (line:1)
+    2. Invalid expression (line:25)
+    2. Invalid return statement: missing semicolon(line: 28)
+*/
+
+int calculation(int a, int b) {
+    int c;
+    c = a - b * -10
+    return c;
+}
+
+
+bool main (void) {
+    int x;
+    int y;
+    int z;
+    int l[10];
+
+    x = 5;
+    y = 7;
+    z = subtract(x, y);
+
+
+    true = 5;
+
+    if (z == 10)
+    {
+        l[0] = z;
+        return true
+    }
+}
