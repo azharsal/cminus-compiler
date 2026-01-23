@@ -4,7 +4,7 @@ void main(void) {
   int x; 
   int fac;
   bool test;
-
+ 
   x = input();
   fac = 1;
   test = x > 1;
